@@ -1,0 +1,9 @@
+query GET_LOGS {
+  logs {
+    id
+    message
+    notes
+    status
+    type
+  }
+}

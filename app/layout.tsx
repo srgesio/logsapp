@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ApolloWrapper from "./contexts/ApolloWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ApolloWrapper>
+        <body className={`${inter.className} p-4`}>
+
+          <header className="py-4 border-b-2 border-emerald-300">
+
+            <h1 className="text-2xl font-extrabold">LogsApp</h1>
+
+          </header>
+
+          {children}
+        </body>
+      </ApolloWrapper>
     </html>
   );
 }
