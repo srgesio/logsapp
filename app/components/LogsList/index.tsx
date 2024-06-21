@@ -8,7 +8,7 @@ export function LogsList() {
     console.log("logs", logs)
     if (loading) return (<p>Loading...</p>)
 
-    if (!logs) return (
+    if (!logs.length) return (
         <section>
             <h2 className="font-extrabold text-lg">Logs List</h2>
             <p>No logs found</p>
