@@ -1,0 +1,7 @@
+mutation ADD_LOG($adddata: AddLogInput!) {
+  addLog(adddata: $adddata) {
+    id
+    message
+    type
+  }
+}

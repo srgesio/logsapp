@@ -4,9 +4,7 @@ import { LogsProvider } from "./contexts/LogProvider";
 export default function Home() {
   return (
     <LogsProvider>
-      <main className="py-4">
-        <LogsList />
-      </main>
+      <LogsList />
     </LogsProvider>
   )
 }

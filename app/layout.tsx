@@ -19,11 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ApolloWrapper>
-        <body className={`${inter.className} p-4`}>
+        <body className={`${inter.className} h-full min-h-screen bg-gradient-to-br from-black to-zinc-900/80 p-4 flex flex-col gap-4 transition-all`}>
 
-          <header className="py-4 border-b-2 border-emerald-300">
+          <header className="py-2 border-b-2 border-emerald-500">
 
-            <h1 className="text-2xl font-extrabold">LogsApp</h1>
+            <h1 className="text-2xl font-bold">LogsApp</h1>
 
           </header>
 

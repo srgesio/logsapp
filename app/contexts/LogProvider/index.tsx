@@ -1,7 +1,7 @@
 "use client"
 
-import { createContext, ReactNode } from "react"
-import { useQuery } from "@apollo/client"
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react"
+import { ApolloQueryResult, OperationVariables, useQuery } from "@apollo/client"
 import { GET_LOGS } from "../../graphql/queries/getLogs.gql"
 
 type LogsProviderProps = {
@@ -11,6 +11,9 @@ type LogsProviderProps = {
 type LogsContextData = {
     logs: Log[]
     loading: boolean
+    refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>
+    showAddLog: boolean
+    setShowAddLog: Dispatch<SetStateAction<boolean>>
 }
 
 interface Log {
@@ -24,12 +27,15 @@ interface Log {
 export const LogsContext = createContext({} as LogsContextData)
 
 export function LogsProvider({ children }: LogsProviderProps) {
-    const { data, loading } = useQuery(GET_LOGS)
-    console.log("data", data)
+    const { data, loading, refetch } = useQuery(GET_LOGS)
+    const [showAddLog, setShowAddLog] = useState(false)
     return (
         <LogsContext.Provider value={{
             logs: data?.logs || [],
             loading,
+            refetch,
+            showAddLog,
+            setShowAddLog
         }}>
             {children}
         </LogsContext.Provider>
