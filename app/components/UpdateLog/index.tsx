@@ -87,9 +87,8 @@ export function UpdateLog() {
                         <label className='text-zinc-500' >Notas:</label>
                         {
                             notes?.map((note, index) => (
-                                <div className='flex gap-2 w-full items-center'>
+                                <div className='flex gap-2 w-full items-center' key={`note-${index}`}>
                                     <textarea
-                                        key={index}
                                         name={`note-${index}`}
                                         id={`note-${index}`}
                                         defaultValue={note}
