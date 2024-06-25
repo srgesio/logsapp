@@ -4,7 +4,6 @@ import { useLogs } from "@/app/hooks/useLogs"
 import { AddLog } from "../AddLog"
 import { ButtonAddLog } from "../AddLog/ButtonAddLog"
 import { LogItem } from "../LogItem"
-import { UpdateLog } from "../UpdateLog/AddLog"
 
 export function LogsList() {
     const { logs, loading } = useLogs()
@@ -20,7 +19,6 @@ export function LogsList() {
                 </header>
                 {!logs.length && <p>No logs found</p>}
                 {logs.length > 0 && logs?.map(log => (
-
                     <LogItem key={log.id} log={log} />
                 ))}
                 <footer className="flex justify-between">

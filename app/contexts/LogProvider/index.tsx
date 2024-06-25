@@ -8,14 +8,19 @@ type LogsProviderProps = {
     children: ReactNode
 }
 
+type ShowUptdateLogProps = {
+    show: boolean
+    id: string
+}
+
 type LogsContextData = {
     logs: Log[]
     loading: boolean
     refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>
     showAddLog: boolean
     setShowAddLog: Dispatch<SetStateAction<boolean>>
-    showUpdateLog: boolean
-    setShowUpdateLog: Dispatch<SetStateAction<boolean>>
+    showUpdateLog: ShowUptdateLogProps
+    setShowUpdateLog: Dispatch<SetStateAction<ShowUptdateLogProps>>
 }
 
 interface Log {
@@ -31,7 +36,7 @@ export const LogsContext = createContext({} as LogsContextData)
 export function LogsProvider({ children }: LogsProviderProps) {
     const { data, loading, refetch } = useQuery(GET_LOGS)
     const [showAddLog, setShowAddLog] = useState(false)
-    const [showUpdateLog, setShowUpdateLog] = useState(false)
+    const [showUpdateLog, setShowUpdateLog] = useState<ShowUptdateLogProps>({ show: false, id: "" })
     return (
         <LogsContext.Provider value={{
             logs: data?.logs || [],
