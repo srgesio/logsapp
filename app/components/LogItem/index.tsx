@@ -10,11 +10,16 @@ export function LogItem({ log }: LogItemProps) {
     return (
         <div className="flex justify-between items-center gap-4">
             <UpdateLog />
-            <div>
-                <h3>{log.status == "todo" ? "[ ]" : log.status} - {log.message}</h3>
-                {log?.notes?.map((note) => (
-                    <p key={note} className="text-zinc-500">{note}</p>
-                ))}
+            <div className="flex gap-4">
+                <button type="button">
+                    {log.status}
+                </button>
+                <div>
+                    <h3>{log.status == "todo" ? "[ ]" : log.status} - {log.message}</h3>
+                    {log?.notes?.map((note) => (
+                        <p key={note} className="text-zinc-500">{note}</p>
+                    ))}
+                </div>
             </div>
             <ButtonUpdateLog id={log.id} />
 

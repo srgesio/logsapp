@@ -18,11 +18,16 @@ export function AddLog() {
 
     const handleSubmit = ((e: React.FormEvent<HTMLFormElement>) => {
         const formData = new FormData(e.currentTarget)
+
+        const notes = Array.from(formData.keys())
+            .filter(key => key.startsWith('note-'))
+            .map(key => formData.get(key))
+
         addLog({
             variables: {
                 adddata: {
                     message: formData.get('message'),
-                    notes: formData.get('notes')
+                    notes: notes
                 }
             }
         })
