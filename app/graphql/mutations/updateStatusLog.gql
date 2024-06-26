@@ -1,0 +1,6 @@
+mutation UPDATE_STATUS_LOG($updatedata: UpdateLogInput!) {
+  updateLog(updatedata: $updatedata) {
+    id
+    status
+  }
+}

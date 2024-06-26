@@ -8,18 +8,22 @@ import WriteIcon from '../Icons/WriteIcon'
 export function AddLog() {
 
     const { refetch, showAddLog, setShowAddLog } = useLogs()
-    const [notes, setNotes] = useState<string[]>([''])
+    const [notes, setNotes] = useState([{ id: 'note-0', content: '' }])
+    function finishAdding() {
+        setShowAddLog(false)
+        setNotes([{ id: 'note-0', content: '' }])
+    }
     const [addLog] = useMutation(ADD_LOG, {
         onCompleted: () => {
             refetch()
-            setShowAddLog(false)
+            finishAdding()
         }
     })
 
     const handleSubmit = ((e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         const formData = new FormData(e.currentTarget)
-
-        const notes = Array.from(formData.keys())
+        const notesAdded = Array.from(formData.keys())
             .filter(key => key.startsWith('note-'))
             .map(key => formData.get(key))
 
@@ -27,12 +31,19 @@ export function AddLog() {
             variables: {
                 adddata: {
                     message: formData.get('message'),
-                    notes: notes
+                    notes: notesAdded
                 }
             }
         })
     }
     )
+    const handleCreateNote = (() => {
+        setNotes(previousNotes => [...previousNotes, { id: `note-${previousNotes.length}`, content: '' }])
+    })
+    const handleDeleteNote = ((noteToDeleteId: string) => {
+        setNotes(previousNote => [...previousNote.filter((note) => note.id !== noteToDeleteId)])
+    })
+
     return (
         <>
             {showAddLog && <form onSubmit={(e) => handleSubmit(e)} className="absolute rounded-2xl top-0 left-0 w-full h-full flex bg-black/90">
@@ -42,7 +53,7 @@ export function AddLog() {
                             <button
                                 type='button'
                                 className="flex justify-center items-center p-1 rounded-lg size-6 bg-gradient-to-br from-red-800 to-red-800/0 hover:bg-red-800 border-2 border-red-800"
-                                onClick={() => setShowAddLog(false)}>
+                                onClick={() => finishAdding()}>
                                 X
                             </button>
                         </div>
@@ -63,25 +74,25 @@ export function AddLog() {
                     <section className='flex flex-col gap-2 w-full'>
                         <label className='text-zinc-500' htmlFor='notes'>Notas:</label>
                         {
-                            notes?.map((note, index) => (
-                                <div className='flex gap-2 w-full items-center' key={`note-${index}`}>
-                                    <textarea
-                                        name={`note-${index}`}
-                                        id={`note-${index}`}
-                                        defaultValue={note}
+                            notes?.map((note) => (
+                                <div className='flex gap-2 w-full items-center' key={`${note.id}`}>
+                                    <input
+                                        type='text'
+                                        name={`${note.id}`}
+                                        id={`${note.id}`}
                                         className="p-2 rounded-lg border-2 w-full border-zinc-800 bg-zinc-900 min-h-12"
                                         placeholder={'Faça uma anotação...'}
                                     />
                                     <button
                                         type='button'
                                         className="flex justify-center items-center p-1 rounded-lg size-6 bg-gradient-to-br from-red-800 to-red-800/0 hover:bg-red-800 border-2 border-red-800"
-                                        onClick={() => setNotes([...notes.filter((_, indexFilter) => index !== indexFilter)])}>
+                                        onClick={() => handleDeleteNote(note.id)}>
                                         -
                                     </button>
                                 </div>
                             ))
                         }
-                        <button className="bg-gradient-to-br from-zinc-700 to-zinc-700/0 border-2 border-zinc-600 hover:bg-zinc-700 py-2 px-4 rounded-lg" type="button" onClick={() => setNotes([...notes, ''])}>+ nota</button>
+                        <button className="bg-gradient-to-br from-zinc-700 to-zinc-700/0 border-2 border-zinc-600 hover:bg-zinc-700 py-2 px-4 rounded-lg" type="button" onClick={() => handleCreateNote()}>+ nota</button>
                     </section>
                     <footer className="flex justify-end">
                         <button type='submit' className="bg-gradient-to-br from-emerald-700 to-emerald-700/0 border-2 border-emerald-600 hover:bg-emerald-700 py-2 px-4 rounded-lg">Salvar</button>

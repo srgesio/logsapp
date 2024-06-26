@@ -19,8 +19,10 @@ type LogsContextData = {
     refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>
     showAddLog: boolean
     setShowAddLog: Dispatch<SetStateAction<boolean>>
+    showUpdateLogStatus: ShowUptdateLogProps
     showUpdateLog: ShowUptdateLogProps
     setShowUpdateLog: Dispatch<SetStateAction<ShowUptdateLogProps>>
+    setShowUpdateLogStatus: Dispatch<SetStateAction<ShowUptdateLogProps>>
 }
 
 interface Log {
@@ -37,6 +39,8 @@ export function LogsProvider({ children }: LogsProviderProps) {
     const { data, loading, refetch } = useQuery(GET_LOGS)
     const [showAddLog, setShowAddLog] = useState(false)
     const [showUpdateLog, setShowUpdateLog] = useState<ShowUptdateLogProps>({ show: false, id: "" })
+    const [showUpdateLogStatus, setShowUpdateLogStatus] = useState<ShowUptdateLogProps>({ show: false, id: "" })
+
     return (
         <LogsContext.Provider value={{
             logs: data?.logs || [],
@@ -45,7 +49,9 @@ export function LogsProvider({ children }: LogsProviderProps) {
             showAddLog,
             setShowAddLog,
             showUpdateLog,
-            setShowUpdateLog
+            setShowUpdateLog,
+            showUpdateLogStatus,
+            setShowUpdateLogStatus
         }}>
             {children}
         </LogsContext.Provider>

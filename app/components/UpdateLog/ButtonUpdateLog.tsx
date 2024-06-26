@@ -1,4 +1,4 @@
-import { useLogs } from "@/app/hooks/useLogs";
+import { useLogs } from "../../hooks/useLogs";
 
 export function ButtonUpdateLog({ id }: { id: string }) {
     const { showUpdateLog, setShowUpdateLog } = useLogs();

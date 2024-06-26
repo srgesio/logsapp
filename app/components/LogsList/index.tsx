@@ -4,6 +4,8 @@ import { useLogs } from "@/app/hooks/useLogs"
 import { AddLog } from "../AddLog"
 import { ButtonAddLog } from "../AddLog/ButtonAddLog"
 import { LogItem } from "../LogItem"
+import { UpdateLog } from "../UpdateLog"
+import { StatusLogSelector } from "../StatusLogSelector"
 
 export function LogsList() {
     const { logs, loading } = useLogs()
@@ -11,6 +13,7 @@ export function LogsList() {
     if (loading) return (<p>Loading...</p>)
     return (
         <section className="relative min-h-[30dvh]">
+            <UpdateLog />
             <AddLog />
             <section className="rounded-2xl flex flex-col gap-4 h-full p-4 bg-gradient-to-br from-white/5 to-white/0 hover:bg-white/5 border-1 border-zinc-800">
                 <header className="flex justify-between">
