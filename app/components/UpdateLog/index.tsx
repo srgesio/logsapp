@@ -70,7 +70,7 @@ export function UpdateLog() {
     })
     return (
         <>
-            {showUpdateLog.show && showUpdateLog.id === currentLog?.id && <form onSubmit={handleSubmit} className="absolute rounded-2xl top-0 left-0 w-full h-full flex bg-black/90">
+            {showUpdateLog.show && showUpdateLog.id === currentLog?.id && <form onSubmit={handleSubmit} className="absolute z-10 rounded-2xl top-0 left-0 w-full flex bg-black">
                 <div className="p-4 rounded-2xl flex flex-col w-full justify-between gap-4">
                     <header className="flex flex-col items-center justify-between">
                         <div className='flex justify-end w-full gap-2'>

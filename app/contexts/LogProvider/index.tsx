@@ -23,6 +23,8 @@ type LogsContextData = {
     showUpdateLog: ShowUptdateLogProps
     setShowUpdateLog: Dispatch<SetStateAction<ShowUptdateLogProps>>
     setShowUpdateLogStatus: Dispatch<SetStateAction<ShowUptdateLogProps>>
+    setShowCompleteLogInfo: Dispatch<SetStateAction<boolean>>
+    showCompleteLogInfo: boolean
 }
 
 interface Log {
@@ -38,6 +40,7 @@ export const LogsContext = createContext({} as LogsContextData)
 export function LogsProvider({ children }: LogsProviderProps) {
     const { data, loading, refetch } = useQuery(GET_LOGS)
     const [showAddLog, setShowAddLog] = useState(false)
+    const [showCompleteLogInfo, setShowCompleteLogInfo] = useState(true)
     const [showUpdateLog, setShowUpdateLog] = useState<ShowUptdateLogProps>({ show: false, id: "" })
     const [showUpdateLogStatus, setShowUpdateLogStatus] = useState<ShowUptdateLogProps>({ show: false, id: "" })
 
@@ -51,7 +54,9 @@ export function LogsProvider({ children }: LogsProviderProps) {
             showUpdateLog,
             setShowUpdateLog,
             showUpdateLogStatus,
-            setShowUpdateLogStatus
+            setShowUpdateLogStatus,
+            setShowCompleteLogInfo,
+            showCompleteLogInfo
         }}>
             {children}
         </LogsContext.Provider>

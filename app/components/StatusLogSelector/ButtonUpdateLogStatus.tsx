@@ -9,6 +9,8 @@ export function ButtonUpdateLogStatus({ id }: { id: string }) {
             todo: "⬜",
             partialDone: "🟨",
             done: "🟩",
+            closed: "🟫",
+            impediment: "🟥"
         }
         return statusPresentation[status as keyof typeof statusPresentation];
     }

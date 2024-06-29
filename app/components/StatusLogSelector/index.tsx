@@ -52,6 +52,8 @@ export function StatusLogSelector({ log }: StatusLogSelectorProps) {
             todo: "⬜",
             partialDone: "🟨",
             done: "🟩",
+            closed: "🟫",
+            impediment: "🟥"
         }
         return statusPresentation[status as keyof typeof statusPresentation];
     })
@@ -62,6 +64,7 @@ export function StatusLogSelector({ log }: StatusLogSelectorProps) {
                     <button onClick={() => handleSelect("todo")}> {handleStatusPresentation("todo")} Pendente</button>
                     <button onClick={() => handleSelect("partialDone")}>{handleStatusPresentation("partialDone")} Adiado</button>
                     <button onClick={() => handleSelect("done")}>{handleStatusPresentation("done")} Feito</button>
+                    <button onClick={() => handleSelect("impediment")}>{handleStatusPresentation("impediment")} Impedido</button>
                 </section>
             </div>
             }
