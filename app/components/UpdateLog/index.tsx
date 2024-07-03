@@ -46,7 +46,8 @@ export function UpdateLog() {
                 updatedata: {
                     id: showUpdateLog.id,
                     message: formData.get('message'),
-                    notes: notesUpdated
+                    notes: notesUpdated,
+                    status: currentLog?.status
                 }
             }
         })
