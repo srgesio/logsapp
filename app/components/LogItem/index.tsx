@@ -22,7 +22,7 @@ export function LogItem({ log }: LogItemProps) {
         return statusTitle[status as keyof typeof statusTitle];
     }
     return (
-        <div className={`flex justify-between relative items-start rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-900/0 gap-4 p-2`}>
+        <div className={`flex justify-between relative items-start rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-900/0 hover:bg-zinc-700 gap-4 p-2`}>
 
             <ButtonUpdateLogStatus id={log.id} />
             <StatusLogSelector key={`statusSelector-${log.id}`} log={log} />

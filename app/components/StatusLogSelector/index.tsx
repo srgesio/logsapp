@@ -59,7 +59,7 @@ export function StatusLogSelector({ log }: StatusLogSelectorProps) {
     })
     return (
         <>
-            {showUpdateLogStatus.show && showUpdateLogStatus.id === log?.id && <div className="absolute top-11 mt-2 w-full min-w-40 z-10 p-4 rounded-2xl flex flex-col bg-zinc-800 justify-between gap-4">
+            {showUpdateLogStatus.show && showUpdateLogStatus.id === log?.id && <div className="absolute top-11 mt-2 w-full max-w-40 z-10 p-4 rounded-2xl flex flex-col bg-zinc-800 justify-between gap-4">
                 <section className='flex flex-col items-start gap-2'>
                     <button onClick={() => handleSelect("todo")}> {handleStatusPresentation("todo")} Pendente</button>
                     <button onClick={() => handleSelect("partialDone")}>{handleStatusPresentation("partialDone")} Adiado</button>
