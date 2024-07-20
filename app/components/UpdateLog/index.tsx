@@ -29,7 +29,7 @@ export function UpdateLog() {
     })
 
     useEffect(() => {
-        const formatLogNotes = currentLog?.notes.map((note, index) => ({ id: `note-${index}`, content: note }))
+        const formatLogNotes = currentLog?.notes?.map((note, index) => ({ id: `note-${index}`, content: note }))
         setNotes(formatLogNotes || [])
     }, [currentLog])
 
@@ -47,7 +47,8 @@ export function UpdateLog() {
                     id: showUpdateLog.id,
                     message: formData.get('message'),
                     notes: notesUpdated,
-                    status: currentLog?.status
+                    status: currentLog?.status,
+                    collectionId: currentLog?.collectionId
                 }
             }
         })
@@ -57,7 +58,8 @@ export function UpdateLog() {
         deleteLog({
             variables: {
                 deletedata: {
-                    id: showUpdateLog.id
+                    id: showUpdateLog.id,
+                    collectionId: currentLog?.collectionId
                 }
             }
         })
@@ -71,7 +73,7 @@ export function UpdateLog() {
     })
     return (
         <>
-            {showUpdateLog.show && showUpdateLog.id === currentLog?.id && <form onSubmit={handleSubmit} className="absolute z-10 rounded-2xl top-0 left-0 w-full flex bg-black">
+            {showUpdateLog.show && showUpdateLog.id === currentLog?.id && <form onSubmit={handleSubmit} className="fixed z-10 rounded-2xl top-0 left-0 w-full flex h-full bg-black">
                 <div className="p-4 rounded-2xl flex flex-col w-full justify-between gap-4">
                     <header className="flex flex-col items-center justify-between">
                         <div className='flex justify-end w-full gap-2'>
@@ -96,7 +98,7 @@ export function UpdateLog() {
                             placeholder={'O que você precisa fazer?'}
                         />
                     </section>
-                    <section className='flex flex-col gap-2 w-full'>
+                    <section className='flex flex-col h-full overflow-auto gap-2 w-full'>
                         <label className='text-zinc-500' >Notas:</label>
                         {
                             notes?.map((note) => (

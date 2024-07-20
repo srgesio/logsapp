@@ -31,7 +31,7 @@ export function LogItem({ log }: LogItemProps) {
                 {showCompleteLogInfo &&
                     <div className="flex flex-col gap-4">
                         {log?.notes?.map((note, index) => (
-                            <p key={`${note}-${index}`} className="text-zinc-500 text-xs">{note}</p>
+                            <p key={`${note}-${index}`} className="text-zinc-500 text-sm">{note}</p>
                         ))}
                     </div>
                 }

@@ -1,0 +1,15 @@
+query GET_COLLECTIONS {
+  collections {
+    
+  id,
+  name,
+  logs {
+    id
+    message
+    notes
+    status
+    type
+    collectionId
+  }
+  }
+}

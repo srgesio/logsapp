@@ -5,7 +5,7 @@ import { ADD_LOG } from '@/app/graphql/mutations/addLog.gql'
 import { useLogs } from '@/app/hooks/useLogs'
 import WriteIcon from '../Icons/WriteIcon'
 
-export function AddLog() {
+export function AddLog({ collectionId }: { collectionId: string }) {
 
     const { refetch, showAddLog, setShowAddLog } = useLogs()
     const [notes, setNotes] = useState([{ id: 'note-0', content: '' }])
@@ -31,7 +31,8 @@ export function AddLog() {
             variables: {
                 adddata: {
                     message: formData.get('message'),
-                    notes: notesAdded
+                    notes: notesAdded,
+                    collectionId
                 }
             }
         })
@@ -46,7 +47,7 @@ export function AddLog() {
 
     return (
         <>
-            {showAddLog && <form onSubmit={(e) => handleSubmit(e)} className="absolute z-10 rounded-2xl top-0 left-0 w-full flex bg-black">
+            {showAddLog && <form onSubmit={(e) => handleSubmit(e)} className="fixed z-10 rounded-2xl h-full top-0 left-0 w-full flex bg-black">
                 <div className="p-4 rounded-2xl flex flex-col w-full justify-between gap-4">
                     <header className="flex flex-col items-center justify-between">
                         <div className='flex justify-end w-full gap-2'>
@@ -71,7 +72,7 @@ export function AddLog() {
                             placeholder={'O que você precisa fazer?'}
                         />
                     </section>
-                    <section className='flex flex-col gap-2 w-full'>
+                    <section className='flex flex-col h-full overflow-auto gap-2 w-full'>
                         <label className='text-zinc-500' htmlFor='notes'>Notas:</label>
                         {
                             notes?.map((note) => (
