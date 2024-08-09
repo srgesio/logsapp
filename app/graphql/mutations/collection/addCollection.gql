@@ -1,0 +1,5 @@
+mutation ADD_COLLECTION($adddata: AddCollectionInput!) {
+  addCollection(adddata: $adddata) {
+    name
+  }
+}

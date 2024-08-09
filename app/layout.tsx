@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ApolloWrapper from "./contexts/ApolloWrapper";
+import { ButtonAddCollection } from "./components/AddCollection/ButtonAddCollection";
+import { LogsProvider } from "./contexts/LogProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +22,14 @@ export default function RootLayout({
     <html lang="en">
       <ApolloWrapper>
         <body className={`${inter.className} h-full min-h-screen bg-gradient-to-br from-black to-zinc-900/80 p-4 flex flex-col gap-4 transition-all`}>
+          <LogsProvider>
+            <header className="flex justify-between items-center py-2 border-b-2 border-emerald-500">
+              <h1 className="text-2xl font-bold">LogsApp</h1>
+              <ButtonAddCollection />
+            </header>
 
-          <header className="py-2 border-b-2 border-emerald-500">
-
-            <h1 className="text-2xl font-bold">LogsApp</h1>
-
-          </header>
-
-          {children}
+            {children}
+          </LogsProvider>
         </body>
       </ApolloWrapper>
     </html>

@@ -1,0 +1,6 @@
+mutation UPDATE_COLLECTION($updatedata: UpdateCollectionInput!) {
+  updateCollection(updatedata: $updatedata) {
+    id
+    name
+  }
+}

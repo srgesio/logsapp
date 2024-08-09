@@ -42,6 +42,7 @@ export function StatusLogSelector({ log }: StatusLogSelectorProps) {
                 updatedata: {
                     id: showUpdateLogStatus.id,
                     status: statusSelected,
+                    collectionId: log.collectionId
                 }
             }
         })
